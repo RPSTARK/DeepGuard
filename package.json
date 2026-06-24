@@ -1,0 +1,161 @@
+{
+  "name": "depguard",
+  "displayName": "DepGuard — AI Dependency Guardian",
+  "description": "Detect, verify, and secure Python and JavaScript dependencies before you install them. Typosquat protection, CVE scanning, malware and secret detection.",
+  "version": "0.4.0",
+  "publisher": "depguard",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "python",
+    "dependencies",
+    "security",
+    "typosquatting",
+    "supply chain",
+    "pip"
+  ],
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/depguard-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/depguard-vscode/issues"
+  },
+  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/depguard-vscode#readme",
+  "galleryBanner": {
+    "color": "#0d1117",
+    "theme": "dark"
+  },
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:python",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onStartupFinished",
+    "workspaceContains:**/*.py",
+    "workspaceContains:**/package.json"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "depguard.analyzeFile",
+        "title": "DepGuard: Analyze Dependencies in File",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "depguard.analyzeSelection",
+        "title": "DepGuard: Analyze Pasted Code (Selection)"
+      },
+      {
+        "command": "depguard.analyzeProject",
+        "title": "DepGuard: Analyze Whole Project"
+      },
+      {
+        "command": "depguard.generateRequirements",
+        "title": "DepGuard: Generate requirements.txt"
+      },
+      {
+        "command": "depguard.createVenv",
+        "title": "DepGuard: Create Virtual Environment"
+      },
+      {
+        "command": "depguard.generateSBOM",
+        "title": "DepGuard: Generate SBOM (CycloneDX)"
+      },
+      {
+        "command": "depguard.bootstrapProject",
+        "title": "DepGuard: Bootstrap Project (scaffold files)"
+      },
+      {
+        "command": "depguard.setupProject",
+        "title": "DepGuard: Set Up Project (scan all + venv + install)",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "depguard.scanPackage",
+        "title": "DepGuard: Scan a Package for Malicious Install Code"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceLangId == python",
+          "command": "depguard.analyzeFile",
+          "group": "navigation"
+        },
+        {
+          "when": "resourceLangId == python",
+          "command": "depguard.setupProject",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "resourceLangId == python",
+          "command": "depguard.analyzeFile",
+          "group": "depguard"
+        },
+        {
+          "when": "editorHasSelection && resourceLangId == python",
+          "command": "depguard.analyzeSelection",
+          "group": "depguard"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DepGuard",
+      "properties": {
+        "depguard.analyzeOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run dependency + security analysis automatically when a Python file is saved."
+        },
+        "depguard.enableCveScan": {
+          "type": "boolean",
+          "default": true,
+          "description": "Query OSV.dev for known vulnerabilities in detected packages (requires network access)."
+        },
+        "depguard.enableSecretScan": {
+          "type": "boolean",
+          "default": true,
+          "description": "Scan analyzed code for hardcoded secrets (API keys, tokens)."
+        },
+        "depguard.enableMalwareScan": {
+          "type": "boolean",
+          "default": true,
+          "description": "Before installing, download and scan each package's source distribution (setup.py) for malicious install-time code, and block high-risk packages."
+        },
+        "depguard.pythonPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the Python interpreter. Leave empty to auto-detect (uses the Python extension's selected interpreter when available)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "tsc -p ./",
+    "lint": "tsc --noEmit -p ./",
+    "test": "tsc -p ./ && node --test \"dist/test/**/*.test.js\"",
+    "publish:patch": "vsce publish patch",
+    "publish:minor": "vsce publish minor",
+    "publish:major": "vsce publish major"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}
