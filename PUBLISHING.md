@@ -1,4 +1,4 @@
-# Publishing DepGuard to the VS Code Marketplace
+# Publishing DeepGuard to the VS Code Marketplace
 
 A one-time setup, then `npm run publish:patch` for every release. ~20 minutes
 the first time.
@@ -7,14 +7,14 @@ the first time.
 
 ## 0. Before you start — edit two things in `package.json`
 
-1. **`publisher`** (currently `"depguard"`). This MUST match a publisher ID you
+1. **`publisher`** (currently `"deepguard"`). This MUST match a publisher ID you
    own on the Marketplace (you create it in step 2). Pick a unique id — e.g.
    your name or company. Lowercase, no spaces.
 2. **`repository` / `bugs` / `homepage`** — replace `YOUR_GITHUB_USERNAME` with
    your GitHub user (or remove these fields if you won't host the code publicly).
    The Marketplace shows a "Repository" link from this.
 
-> The extension ID becomes `<publisher>.depguard`. Once published you cannot
+> The extension ID becomes `<publisher>.deepguard`. Once published you cannot
 > rename it, so choose the publisher id deliberately.
 
 ---
@@ -58,7 +58,7 @@ vsce login <your-publisher-id>
 
 ## 5. Publish
 
-From the `depguard-vscode/` folder:
+From the `deepguard-vscode/` folder:
 
 ```bash
 npm test            # make sure the suite passes first
@@ -71,11 +71,11 @@ Or publish the current version as-is without bumping:
 vsce publish
 ```
 
-It appears at `https://marketplace.visualstudio.com/items?itemName=<publisher>.depguard`
+It appears at `https://marketplace.visualstudio.com/items?itemName=<publisher>.deepguard`
 within a few minutes. Users then install with:
 
 ```bash
-code --install-extension <publisher>.depguard
+code --install-extension <publisher>.deepguard
 ```
 
 ---
@@ -94,7 +94,7 @@ for you and `vscode:prepublish` recompiles automatically.
 - **Icon:** must be a real PNG (already provided at `media/icon.png`). ✓
 - **README:** becomes the Marketplace page — already written. ✓
 - **LICENSE:** present (MIT). ✓
-- **No telemetry:** DepGuard sends nothing to its own servers; it only calls
+- **No telemetry:** DeepGuard sends nothing to its own servers; it only calls
   PyPI, npm, OSV.dev, and deps.dev. Worth stating on the Marketplace page for
   security-conscious users.
 - If `vsce` complains about activation/size, run `vsce ls` to see exactly what

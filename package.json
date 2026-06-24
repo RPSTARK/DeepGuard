@@ -1,9 +1,9 @@
 {
-  "name": "depguard",
-  "displayName": "DepGuard — AI Dependency Guardian",
+  "name": "deepguard",
+  "displayName": "DeepGuard — AI Dependency Guardian",
   "description": "Detect, verify, and secure Python and JavaScript dependencies before you install them. Typosquat protection, CVE scanning, malware and secret detection.",
   "version": "0.4.0",
-  "publisher": "depguard",
+  "publisher": "vulncraft",
   "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
@@ -24,12 +24,12 @@
   "icon": "media/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_GITHUB_USERNAME/depguard-vscode.git"
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/deepguard-vscode.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_GITHUB_USERNAME/depguard-vscode/issues"
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/deepguard-vscode/issues"
   },
-  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/depguard-vscode#readme",
+  "homepage": "https://github.com/YOUR_GITHUB_USERNAME/deepguard-vscode#readme",
   "galleryBanner": {
     "color": "#0d1117",
     "theme": "dark"
@@ -46,94 +46,94 @@
   "contributes": {
     "commands": [
       {
-        "command": "depguard.analyzeFile",
-        "title": "DepGuard: Analyze Dependencies in File",
+        "command": "deepguard.analyzeFile",
+        "title": "DeepGuard: Analyze Dependencies in File",
         "icon": "$(shield)"
       },
       {
-        "command": "depguard.analyzeSelection",
-        "title": "DepGuard: Analyze Pasted Code (Selection)"
+        "command": "deepguard.analyzeSelection",
+        "title": "DeepGuard: Analyze Pasted Code (Selection)"
       },
       {
-        "command": "depguard.analyzeProject",
-        "title": "DepGuard: Analyze Whole Project"
+        "command": "deepguard.analyzeProject",
+        "title": "DeepGuard: Analyze Whole Project"
       },
       {
-        "command": "depguard.generateRequirements",
-        "title": "DepGuard: Generate requirements.txt"
+        "command": "deepguard.generateRequirements",
+        "title": "DeepGuard: Generate requirements.txt"
       },
       {
-        "command": "depguard.createVenv",
-        "title": "DepGuard: Create Virtual Environment"
+        "command": "deepguard.createVenv",
+        "title": "DeepGuard: Create Virtual Environment"
       },
       {
-        "command": "depguard.generateSBOM",
-        "title": "DepGuard: Generate SBOM (CycloneDX)"
+        "command": "deepguard.generateSBOM",
+        "title": "DeepGuard: Generate SBOM (CycloneDX)"
       },
       {
-        "command": "depguard.bootstrapProject",
-        "title": "DepGuard: Bootstrap Project (scaffold files)"
+        "command": "deepguard.bootstrapProject",
+        "title": "DeepGuard: Bootstrap Project (scaffold files)"
       },
       {
-        "command": "depguard.setupProject",
-        "title": "DepGuard: Set Up Project (scan all + venv + install)",
+        "command": "deepguard.setupProject",
+        "title": "DeepGuard: Set Up Project (scan all + venv + install)",
         "icon": "$(rocket)"
       },
       {
-        "command": "depguard.scanPackage",
-        "title": "DepGuard: Scan a Package for Malicious Install Code"
+        "command": "deepguard.scanPackage",
+        "title": "DeepGuard: Scan a Package for Malicious Install Code"
       }
     ],
     "menus": {
       "editor/title": [
         {
           "when": "resourceLangId == python",
-          "command": "depguard.analyzeFile",
+          "command": "deepguard.analyzeFile",
           "group": "navigation"
         },
         {
           "when": "resourceLangId == python",
-          "command": "depguard.setupProject",
+          "command": "deepguard.setupProject",
           "group": "navigation"
         }
       ],
       "editor/context": [
         {
           "when": "resourceLangId == python",
-          "command": "depguard.analyzeFile",
-          "group": "depguard"
+          "command": "deepguard.analyzeFile",
+          "group": "deepguard"
         },
         {
           "when": "editorHasSelection && resourceLangId == python",
-          "command": "depguard.analyzeSelection",
-          "group": "depguard"
+          "command": "deepguard.analyzeSelection",
+          "group": "deepguard"
         }
       ]
     },
     "configuration": {
-      "title": "DepGuard",
+      "title": "DeepGuard",
       "properties": {
-        "depguard.analyzeOnSave": {
+        "deepguard.analyzeOnSave": {
           "type": "boolean",
           "default": true,
           "description": "Run dependency + security analysis automatically when a Python file is saved."
         },
-        "depguard.enableCveScan": {
+        "deepguard.enableCveScan": {
           "type": "boolean",
           "default": true,
           "description": "Query OSV.dev for known vulnerabilities in detected packages (requires network access)."
         },
-        "depguard.enableSecretScan": {
+        "deepguard.enableSecretScan": {
           "type": "boolean",
           "default": true,
           "description": "Scan analyzed code for hardcoded secrets (API keys, tokens)."
         },
-        "depguard.enableMalwareScan": {
+        "deepguard.enableMalwareScan": {
           "type": "boolean",
           "default": true,
           "description": "Before installing, download and scan each package's source distribution (setup.py) for malicious install-time code, and block high-risk packages."
         },
-        "depguard.pythonPath": {
+        "deepguard.pythonPath": {
           "type": "string",
           "default": "",
           "description": "Path to the Python interpreter. Leave empty to auto-detect (uses the Python extension's selected interpreter when available)."

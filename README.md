@@ -1,11 +1,11 @@
-# DepGuard — AI Dependency Guardian
+# DeepGuard — AI Dependency Guardian
 
 A VS Code extension that turns the slow "paste → run → error → google → install → repeat"
 loop into one safe click — and screens every dependency for danger **before** anything is installed.
 
 > **Detect → Verify → Secure → Install**
 
-**Languages:** Python (pip/PyPI) and JavaScript/TypeScript (npm). DepGuard
+**Languages:** Python (pip/PyPI) and JavaScript/TypeScript (npm). DeepGuard
 auto-detects the project's ecosystem and runs the same pipeline for both —
 typosquat screening (top-8,000 packages per registry), OSV CVE scanning,
 registry license/existence checks, and a code-risk scan of your own source.
@@ -28,26 +28,26 @@ Typosquats and secrets also appear as **inline squiggles** in the editor.
 ## Usage
 
 1. Open a Python file.
-2. Run **DepGuard: Analyze Dependencies in File** (editor title-bar shield icon, right-click menu, or Command Palette). Select code first and use **Analyze Pasted Code (Selection)** for the paste flow.
+2. Run **DeepGuard: Analyze Dependencies in File** (editor title-bar shield icon, right-click menu, or Command Palette). Select code first and use **Analyze Pasted Code (Selection)** for the paste flow.
 3. Review the panel — detected deps, missing packages, typosquat/CVE/secret warnings — and click **Install**.
 
-Analysis also runs automatically on save (toggle with `depguard.analyzeOnSave`).
+Analysis also runs automatically on save (toggle with `deepguard.analyzeOnSave`).
 
 ### Commands
-- `DepGuard: Analyze Dependencies in File`
-- `DepGuard: Analyze Pasted Code (Selection)`
-- `DepGuard: Generate requirements.txt`
-- `DepGuard: Generate SBOM (CycloneDX)`
-- `DepGuard: Create Virtual Environment`
-- `DepGuard: Bootstrap Project (scaffold files)`
-- `DepGuard: Set Up Project (scan all + venv + install)`
-- `DepGuard: Scan a Package for Malicious Install Code`
+- `DeepGuard: Analyze Dependencies in File`
+- `DeepGuard: Analyze Pasted Code (Selection)`
+- `DeepGuard: Generate requirements.txt`
+- `DeepGuard: Generate SBOM (CycloneDX)`
+- `DeepGuard: Create Virtual Environment`
+- `DeepGuard: Bootstrap Project (scaffold files)`
+- `DeepGuard: Set Up Project (scan all + venv + install)`
+- `DeepGuard: Scan a Package for Malicious Install Code`
 
 ### Settings
-- `depguard.analyzeOnSave` (default `true`)
-- `depguard.enableCveScan` (default `true`) — OSV.dev + PyPI lookups
-- `depguard.enableSecretScan` (default `true`)
-- `depguard.pythonPath` — override interpreter (else uses the Python extension's selection, a workspace `.venv`, or PATH)
+- `deepguard.analyzeOnSave` (default `true`)
+- `deepguard.enableCveScan` (default `true`) — OSV.dev + PyPI lookups
+- `deepguard.enableSecretScan` (default `true`)
+- `deepguard.pythonPath` — override interpreter (else uses the Python extension's selection, a workspace `.venv`, or PATH)
 
 ## Develop & run
 
@@ -61,8 +61,8 @@ Press **F5** in VS Code to launch the Extension Development Host, open a Python 
 
 ```bash
 npm run package        # type-check + build into dist/
-npx @vscode/vsce package   # produce depguard-0.1.0.vsix
-code --install-extension depguard-0.1.0.vsix
+npx @vscode/vsce package   # produce deepguard-0.1.0.vsix
+code --install-extension deepguard-0.1.0.vsix
 ```
 
 ## Architecture

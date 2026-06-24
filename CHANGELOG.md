@@ -18,7 +18,7 @@
 
 ## 0.3.1
 
-- npm supply-chain malware gate: before `npm install`, DepGuard scans each
+- npm supply-chain malware gate: before `npm install`, DeepGuard scans each
   package's lifecycle install scripts (preinstall/install/postinstall) for the
   patterns real npm attacks use — piping a download into a shell, inline
   `node -e`, base64-decoded payloads, process spawning — and blocks high-risk
@@ -27,7 +27,7 @@
 ## 0.3.0
 
 - Multi-language: added JavaScript / TypeScript (npm) support alongside Python.
-  DepGuard auto-detects the project's ecosystem and runs the full pipeline —
+  DeepGuard auto-detects the project's ecosystem and runs the full pipeline —
   import detection (`import`/`require`, scoped packages, subpaths), missing-vs-
   installed via node_modules, typosquat screening against the top-8,000 npm
   packages, CVE scanning via OSV (npm ecosystem), npm registry license/existence,
@@ -67,7 +67,7 @@
 - Activates automatically on startup and scans the WHOLE project (every .py
   file) the moment a folder opens — no need to open a file and run a command.
 - Status bar now reflects the whole project; clicking it opens the full project
-  report. New `DepGuard: Analyze Whole Project` command.
+  report. New `DeepGuard: Analyze Whole Project` command.
 - First automatic scan offers to open the report or run Set Up Project.
 
 ## 0.2.0
@@ -77,8 +77,8 @@
 - New supply-chain malware scan: downloads each package's source distribution
   and inspects `setup.py` for install-time network calls, process spawning, and
   obfuscated `exec`. High-risk packages are blocked before install. New
-  `DepGuard: Scan a Package for Malicious Install Code` command and
-  `depguard.enableMalwareScan` setting.
+  `DeepGuard: Scan a Package for Malicious Install Code` command and
+  `deepguard.enableMalwareScan` setting.
 
 ## 0.1.0
 
