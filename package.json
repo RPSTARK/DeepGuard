@@ -2,7 +2,7 @@
   "name": "deepguard",
   "displayName": "DeepGuard — AI Dependency Guardian",
   "description": "Detect, verify, and secure Python and JavaScript dependencies before you install them. Typosquat protection, CVE scanning, malware and secret detection.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "publisher": "vulncraft",
   "license": "MIT",
   "engines": {
@@ -137,6 +137,21 @@
           "type": "string",
           "default": "",
           "description": "Path to the Python interpreter. Leave empty to auto-detect (uses the Python extension's selected interpreter when available)."
+        },
+        "deepguard.useVirtualEnv": {
+          "type": "string",
+          "enum": [
+            "ask",
+            "always",
+            "never"
+          ],
+          "enumDescriptions": [
+            "Ask each time whether to create/use a .venv when installing Python packages.",
+            "Always install Python packages into the project's .venv, creating it if needed.",
+            "Never create a .venv automatically — install into the selected interpreter. Use the 'Create Virtual Environment' command when you want one explicitly."
+          ],
+          "default": "ask",
+          "description": "How DeepGuard handles virtual environments for Python installs. JavaScript/npm projects never use a virtual environment."
         }
       }
     }

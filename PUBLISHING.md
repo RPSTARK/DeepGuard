@@ -7,7 +7,7 @@ the first time.
 
 ## 0. Before you start — edit two things in `package.json`
 
-1. **`publisher`** (currently `"deepguard"`). This MUST match a publisher ID you
+1. **`publisher`** (currently `"vulncraft"`). This MUST match a publisher ID you
    own on the Marketplace (you create it in step 2). Pick a unique id — e.g.
    your name or company. Lowercase, no spaces.
 2. **`repository` / `bugs` / `homepage`** — replace `YOUR_GITHUB_USERNAME` with
@@ -62,7 +62,7 @@ From the `deepguard-vscode/` folder:
 
 ```bash
 npm test            # make sure the suite passes first
-npm run publish:patch   # bumps 0.4.0 -> 0.4.1, packages, publishes
+npm run publish:patch   # bumps 0.5.0 -> 0.5.1, packages, publishes
 ```
 
 Or publish the current version as-is without bumping:
@@ -95,7 +95,7 @@ for you and `vscode:prepublish` recompiles automatically.
 - **README:** becomes the Marketplace page — already written. ✓
 - **LICENSE:** present (MIT). ✓
 - **No telemetry:** DeepGuard sends nothing to its own servers; it only calls
-  PyPI, npm, OSV.dev, and deps.dev. Worth stating on the Marketplace page for
+  PyPI, npm, and OSV.dev. Worth stating on the Marketplace page for
   security-conscious users.
 - If `vsce` complains about activation/size, run `vsce ls` to see exactly what
   goes into the package (`.vscodeignore` already excludes `src/`, tests, and

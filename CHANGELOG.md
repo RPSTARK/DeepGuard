@@ -1,5 +1,67 @@
 # Changelog
 
+## 0.5.0
+
+A large reliability, security, and UX revision. Highlights:
+
+**Vulnerability audit (npm audit / pip-audit)**
+- New authoritative audit card for both ecosystems: `npm audit` (JavaScript) and
+  `pip-audit` (Python), with a severity breakdown, per-advisory fixability, and a
+  one-click "audit fix" (non-breaking only).
+- pip-audit is **optional** — when it isn't installed, DeepGuard falls back to
+  scanning the installed environment directly via OSV, so you always get results
+  (installing pip-audit just adds one-click fixes).
+- `npm audit fix` now generates a `package-lock.json` first when one is missing,
+  instead of failing with `EUSAGE`.
+- **Removed** the separate transitive dependency scan — the audit card is the
+  authoritative full-tree check, so there is now one vulnerability story:
+  per-package OSV pre-install + audit post-install.
+
+**Severity everywhere**
+- Every finding tab (CVEs, secrets, code risks, dependencies) shows a consistent
+  severity column. CVEs are grouped and sorted by severity with count chips.
+- Project-wide secret scanning: the whole-project report now scans every source
+  and config file (`.env`, `.yaml`, `.toml`, …) for secrets, each attributed to
+  its file. Added detection for modern `sk-proj-…` OpenAI keys.
+
+**Smarter installs**
+- Detects missing wheels up front and swaps to maintained drop-ins
+  (`argon2`→`argon2-cffi`, `pygame`→`pygame-ce`, `pycrypto`→`pycryptodome`,
+  `PIL`→`Pillow`, `MySQL-python`→`mysqlclient`), and always corrects deprecated
+  stub packages (`sklearn`→`scikit-learn`, `bs4`→`beautifulsoup4`).
+- Recognizes stable-ABI (`abi3`) wheels, so packages install cleanly on brand-new
+  Python versions (e.g. 3.14) instead of trying to compile from source.
+- Install failures show a plain-English reason and the relevant log lines in the
+  panel — including a named drop-in suggestion — instead of a raw stack trace.
+- Virtual environments are now opt-in via `deepguard.useVirtualEnv`
+  (`ask`/`always`/`never`); npm projects never create a venv.
+
+**UI**
+- Live install progress card in the report panel (package chips, streaming
+  output, success/failure state, dismiss button) — the single install surface.
+- Summary tiles are clickable filters; findings link to the exact file:line.
+- Typosquat quick-fix lightbulb (`import requets` → "Change to requests").
+- The Python and JavaScript panels now present the same GUI.
+
+**Correctness fixes**
+- Bounded network concurrency (fixes large-project / macOS file-descriptor
+  exhaustion that silently dropped CVEs above ~50 dependencies).
+- Typosquat false positives removed: existing packages, very short names, and
+  common local-module names (`main`, `app`, `utils`, …) are no longer flagged.
+- JavaScript: ignores `require()`/`import()` written inside string literals;
+  maps monorepo/workspace packages and tsconfig path aliases as local modules.
+- `node:`-prefixed builtins are classified as stdlib, not dropped.
+- License surfacing rejects full license-text dumps (e.g. scipy) and shows a
+  short SPDX-style identifier.
+- Language-aware UI: registry name, verify links, and install command match the
+  ecosystem (npm vs PyPI).
+
+**Security hardening of the extension itself**
+- `run()` rejects shell-metacharacter arguments (fixes a command-injection path
+  when launching `npm.cmd` on Windows), frozen by tests.
+- Added `SECURITY.md`, a `CODEOWNERS` danger-zone review policy, a PR security
+  checklist, and a CI workflow.
+
 ## 0.4.0
 
 - Transitive dependency scanning: a new panel section resolves and scans the
